@@ -3,7 +3,7 @@
 Fonts
 ======
 */
-@import url("https://fonts.googleapis.com/css?family=Catamaran:300,400|Kaushan+Script&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Catamaran:300,400|Kaushan+Script&display=swap');
 /* 
 ====== 
 Variables 
@@ -14,8 +14,8 @@ Variables
   /* --primaryDarkColor: #4e1d51; */
   --primaryColor: #f15025;
   --primaryDarkColor: #c02c03;
-  --primaryFont: "Catamaran", sans-serif;
-  --slantedFont: "Kaushan Script", cursive;
+  --primaryFont: 'Catamaran', sans-serif;
+  --slantedFont: 'Kaushan Script', cursive;
   --mainWhite: #fff;
   --offWhite: #f7f7f7;
   --mainBackground: #ececec;
@@ -187,7 +187,7 @@ Hero
       rgba(0, 0, 0, 0.7) 50%,
       rgba(255, 255, 255, 0.1)
     ),
-    url("./assets/mainBcg.jpeg") center/cover no-repeat;
+    url('./assets/mainBcg.jpeg') center/cover no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -734,7 +734,7 @@ Filters Section
   text-transform: capitalize;
   margin-bottom: 0.25rem;
 }
-.filters-form input[type="text"] {
+.filters-form input[type='text'] {
   border: 0.5px solid var(--mainBlack);
   font-size: 0.8rem;
   padding: 0.2rem;
@@ -747,7 +747,7 @@ Filters Section
   border-color: var(--mainBlack);
   border-width: 0.5px;
 }
-.filters-form input[type="checkbox"] {
+.filters-form input[type='checkbox'] {
   margin-right: 0.5rem;
 }
 .price-group p {

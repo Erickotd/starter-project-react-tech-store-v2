@@ -1,7 +1,6 @@
 // cart context
+
 import React, { useState, useEffect } from 'react';
-import reducer from './reducer';
-import { REMOVE, INCREASE, DECREASE, ADD_TO_CART, CLEAR_CART } from './actions';
 
 function getCartFromLocalStorage() {
   return localStorage.getItem('cart')
@@ -12,7 +11,7 @@ function getCartFromLocalStorage() {
 const CartContext = React.createContext();
 
 function CartProvider({ children }) {
-  const [cart, dispatch] = React.useReducer(reducer, getCartFromLocalStorage());
+  const [cart, setCart] = useState(getCartFromLocalStorage());
   const [total, setTotal] = useState(0);
   const [cartItems, setCartItems] = useState(0);
 
@@ -31,33 +30,47 @@ function CartProvider({ children }) {
   }, [cart]);
 
   const removeItem = (id) => {
-    dispatch({ type: REMOVE, payload: id });
+    setCart([...cart].filter((item) => item.id !== id));
   };
 
   const increaseAmount = (id) => {
-    dispatch({ type: INCREASE, payload: id });
+    const newCart = [...cart].map((item) => {
+      return item.id === id
+        ? { ...item, amount: item.amount + 1 }
+        : { ...item };
+    });
+    setCart(newCart);
   };
 
   const decreaseAmount = (id, amount) => {
     if (amount === 1) {
-      dispatch({ type: REMOVE, payload: id });
+      removeItem(id);
       return;
     } else {
-      dispatch({ type: DECREASE, payload: id });
+      const newCart = [...cart].map((item) => {
+        return item.id === id
+          ? { ...item, amount: item.amount - 1 }
+          : { ...item };
+      });
+      setCart(newCart);
     }
   };
 
   const addToCart = (product) => {
-    let item = [...cart].find((item) => item.id === product.id);
+    const { id, image, title, price } = product;
+    const item = [...cart].find((item) => item.id === id);
     if (item) {
-      dispatch({ type: INCREASE, payload: product.id });
+      increaseAmount(id);
+      return;
     } else {
-      dispatch({ type: ADD_TO_CART, payload: product });
+      const newItem = { id, image, title, price, amount: 1 };
+      const newCart = [...cart, newItem];
+      setCart(newCart);
     }
   };
 
   const clearCart = () => {
-    dispatch({ type: CLEAR_CART });
+    setCart([]);
   };
 
   return (
