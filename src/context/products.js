@@ -42,7 +42,7 @@ export default function ProductProvider({ children }) {
     setFilters({ ...filters, [filter]: filterValue });
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     setLoading(true);
     axios.get(`${url}/products`).then((response) => {
       const featured = featuredProducts(flattenProducts(response.data));

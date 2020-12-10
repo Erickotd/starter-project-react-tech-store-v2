@@ -31,7 +31,6 @@ function Checkout(props) {
     if (token) {
       setError('');
       const { id } = token;
-      console.log('jaja-->', id);
       let order = await submitOrder({
         name,
         total,
